@@ -47,7 +47,7 @@ func between(value string, a string, b string) (string, int, int) {
 func preventNested(Text string) (OutText string, FunctionArray []string) {
 	OutText = Text
 	for {
-		Function, start, end := between(OutText, "(", ")")
+		Function, start, end := between(OutText, "{", "}")
 		if Function == "" {
 			break
 		} else {
@@ -63,7 +63,7 @@ func RunCommand(RawText string) error {
 	OutText, FunctionArray := preventNested(RawText)
 	Text := strings.Split(OutText, "-")
 	Command := Text[0]
-	if strings.Contains(Command, "not ok") {
+	if strings.Contains(Command, "notOk") {
 		openbrowser("https://www.awesomeinventions.com/funny-pictures-brighten-your-day/")
 	} else if strings.Contains(Command, "ok") {
 		fmt.Println("OK!")
@@ -81,10 +81,10 @@ func RunCommand(RawText string) error {
 			fmt.Println(":(")
 			RunCommand(BadFunction)
 		}
-	} else if strings.Contains(Command, "Print") {
+	} else if strings.Contains(Command, "print") {
 		Argument := Text[1]
 		fmt.Print(Argument)
-	} else if strings.Contains(Command, "PrintOK") {
+	} else if strings.Contains(Command, "printOK") {
 		Argument := Text[1]
 		fmt.Println(Argument)
 	} else {
